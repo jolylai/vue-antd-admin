@@ -1,4 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from '@/router'
 
-createApp(App).mount('#app')
+import installAntDesign from '@/plugins/ant-design'
+
+const app = createApp(App).use(router)
+
+installAntDesign(app)
+
+app.mount('#app')
