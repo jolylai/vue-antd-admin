@@ -33,6 +33,26 @@ export const constantRoutes = [
     path: '/',
     name: 'Home',
     component: BasicLayout
+  },
+  {
+    path: '/form',
+    name: 'form',
+    redirect: '/form/basic-form',
+    component: BasicLayout,
+    children: [
+      {
+        path: '/form/basic-form',
+        component: () => import('@/views/form/basic-form')
+      },
+      {
+        path: '/form/step-form',
+        component: () => import('@/views/form/step-form')
+      },
+      {
+        path: '/form/advance-form',
+        component: () => import('@/views/form/advance-form')
+      }
+    ]
   }
   //   {
   //     path: "/login",

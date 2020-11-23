@@ -23,6 +23,11 @@ export default {
   components: {
     Sidebar,
     Navbar
+  },
+  setup() {
+    return {
+      collapsed: false
+    }
   }
 }
 </script>
