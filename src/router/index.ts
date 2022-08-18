@@ -1,9 +1,17 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-export const constantRoutes = [
+const BasicLayout = import("@/layout/index.vue");
+
+export const constantRoutes: RouteRecordRaw[] = [
   {
     path: "/",
-    component: () => import("@/views/home.vue"),
+    component: BasicLayout,
+    children: [
+      {
+        path: "/home",
+        component: () => import("@/views/home.vue"),
+      },
+    ],
   },
 ];
 
