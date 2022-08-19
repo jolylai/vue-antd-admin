@@ -11,7 +11,7 @@
           <template #icon>
             <MailOutlined />
           </template>
-          <template #title>Navigation One</template>
+          <template #title>系统管理</template>
           <a-menu-item key="5">Option 5</a-menu-item>
           <a-menu-item key="6">Option 6</a-menu-item>
           <a-menu-item key="7">Option 7</a-menu-item>
@@ -25,6 +25,10 @@
 <script lang="ts" setup>
 import { reactive, watch } from "vue";
 import { MailOutlined } from "@ant-design/icons-vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+console.log("router: ", router.getRoutes());
 
 const state = reactive({
   selectedKeys: ["1"],

@@ -13,6 +13,19 @@ export const constantRoutes: RouteRecordRaw[] = [
       },
     ],
   },
+  {
+    path: "/system",
+    name: "system",
+    component: BasicLayout,
+    meta: { title: "标题" },
+    children: [
+      {
+        path: "/system/job",
+        component: () => import("@/views/system/job/index.vue"),
+        meta: { title: "岗位管理" },
+      },
+    ],
+  },
 ];
 
 const router = createRouter({
