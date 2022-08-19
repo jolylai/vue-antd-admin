@@ -5,8 +5,20 @@
     </a-layout-header>
 
     <a-layout class="main">
-      <a-layout-sider width="200" style="background: #fff">
+      <a-layout-sider
+        v-model:collapsed="collapsed"
+        collapsible
+        :collapsedWidth="47"
+        :width="200"
+        theme="light"
+      >
         <side-menu></side-menu>
+        <template #trigger>
+          <div class="text-left px-4 border-t border-gray-200">
+            <MenuFoldOutlined v-if="collapsed" />
+            <MenuUnfoldOutlined v-else />
+          </div>
+        </template>
       </a-layout-sider>
 
       <a-layout style="padding: 0 24px 24px">
@@ -23,7 +35,7 @@
             minHeight: '280px',
           }"
         >
-          Content
+          <router-view></router-view>
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -31,8 +43,17 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from "vue";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons-vue";
+
 import NavBar from "./nav-bar.vue";
 import SideMenu from "./side-menu.vue";
+
+const collapsed = ref<boolean>(false);
+
+const toggleCollapsed = () => {
+  collapsed.value = !collapsed;
+};
 </script>
 
 <style scoped>
