@@ -24,6 +24,11 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/system/job/index.vue"),
         meta: { title: "岗位管理" },
       },
+      {
+        path: "/system/menu",
+        component: () => import("@/views/system/menu/index.vue"),
+        meta: { title: "菜单管理" },
+      },
     ],
   },
 ];
