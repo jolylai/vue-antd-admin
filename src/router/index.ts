@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-
+import EmptyLayout from "@/layout/empty.vue";
 const BasicLayout = () => import("@/layout/index.vue");
 
 export const constantRoutes: RouteRecordRaw[] = [
   {
-    path: "/",
-    component: BasicLayout,
+    path: "/user",
+    component: EmptyLayout,
     children: [
       {
-        path: "/home",
-        component: () => import("@/views/home.vue"),
+        path: "/user/login",
+        component: () => import("@/views/user/login/index.vue"),
       },
     ],
   },

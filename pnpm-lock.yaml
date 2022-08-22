@@ -10,6 +10,7 @@ specifiers:
   unocss: ^0.45.8
   unplugin-auto-import: ^0.11.2
   unplugin-vue-components: ^0.22.4
+  usevhooks: ^0.0.6
   vite: ^3.0.7
   vue: ^3.2.37
   vue-router: ^4.0.13
@@ -19,6 +20,7 @@ dependencies:
   '@ant-design/icons-vue': registry.npmmirror.com/@ant-design/icons-vue/6.1.0_vue@3.2.37
   ant-design-vue: registry.npmmirror.com/ant-design-vue/3.2.11_vue@3.2.37
   axios: registry.npmmirror.com/axios/0.27.2
+  usevhooks: registry.npmmirror.com/usevhooks/0.0.6
   vue: registry.npmmirror.com/vue/3.2.37
   vue-router: registry.npmmirror.com/vue-router/4.0.13_vue@3.2.37
 
@@ -2012,6 +2014,15 @@ packages:
       webpack-sources: registry.npmmirror.com/webpack-sources/3.2.3
       webpack-virtual-modules: registry.npmmirror.com/webpack-virtual-modules/0.4.4
     dev: true
+
+  registry.npmmirror.com/usevhooks/0.0.6:
+    resolution: {integrity: sha512-vTvxjWjMjxIwU+1FlOWSdFXEaVx6r0TBToU7582wSCJfLgWWCIKyLiB+YEs7Y6/DN4ZYNTOkcf0fU6cBkgNK1Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/usevhooks/-/usevhooks-0.0.6.tgz}
+    name: usevhooks
+    version: 0.0.6
+    dependencies:
+      lodash: registry.npmmirror.com/lodash/4.17.21
+      vue: registry.npmmirror.com/vue/3.2.37
+    dev: false
 
   registry.npmmirror.com/vite/3.0.8:
     resolution: {integrity: sha512-AOZ4eN7mrkJiOLuw8IA7piS4IdOQyQCA81GxGsAQvAZzMRi9ZwGB3TOaYsj4uLAWK46T5L4AfQ6InNGlxX30IQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite/-/vite-3.0.8.tgz}
