@@ -14,10 +14,21 @@ export type MobileLogin = {
 
 export type LoginDto = AccountLogin | MobileLogin;
 
+export type LoginResponse = {
+  token: string;
+};
+
 export const login = (data: LoginDto) => {
-  return request<LoginDto>({
+  return request<LoginDto, LoginResponse>({
     url: "/login",
     method: "post",
     data,
+  });
+};
+
+export const getUser = () => {
+  return request({
+    url: "/api/user",
+    method: "get",
   });
 };

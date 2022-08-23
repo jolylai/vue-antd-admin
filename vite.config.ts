@@ -17,7 +17,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ["ant-design-vue", "axios"],
+    include: ["ant-design-vue", "axios", "pinia", "js-cookie"],
   },
   plugins: [
     vue(),

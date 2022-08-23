@@ -1,5 +1,7 @@
 import Axios from "axios";
-import type { AxiosRequestConfig, AxiosResponse } from "axios";
+import type { AxiosRequestConfig } from "axios";
+import router from "@/router";
+import { useUserStore } from "@/stores/user";
 
 export type RequestResponse<T = any> = {
   code: number;
@@ -9,25 +11,50 @@ export type RequestResponse<T = any> = {
 
 const instance = Axios.create({
   baseURL: "http://localhost:7070",
-  headers: {
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InhpeGkiLCJwYXNzd29yZCI6IiQyYiQxMCRxVzVGcGxLcll6Y01rdmh0WHNQVXB1S1JsTlBwSE9Ma0V1SEJGbjEwd2tid3guZ0JFNE45TyIsImNyZWF0ZWRBdCI6IjIwMjItMDUtMTJUMDk6MDQ6MDUuODgyWiIsInVwZGF0ZWRBdCI6IjIwMjItMDUtMTJUMDk6MDQ6MDUuODg2WiIsImlhdCI6MTY2MDg3NzE1OSwiZXhwIjoxNjYwOTYzNTU5fQ.HajKcj2xETcxwzC8FTii7-z6JrT-vWNlEaqw3FkNkh8",
-  },
 });
 
-instance.interceptors.response.use((response) => {
-  const { data } = response;
+instance.interceptors.request.use((config) => {
+  const userStore = useUserStore();
 
-  // 业务错误
-  if (data.code !== 0) {
-    throw Error(data.message);
+  // if(config.headers.Authorization)
+  const token = userStore.token;
+
+  if (token) {
+    config.headers = Object.assign({}, config.headers, {
+      Authorization: token,
+    });
   }
 
-  return data.data;
+  return config;
 });
 
-const request = <T = any>(config: AxiosRequestConfig) => {
-  return instance.request<T, T>(config);
+instance.interceptors.response.use(
+  (response) => {
+    const { data } = response;
+
+    // 业务错误
+    if (data.code !== 0) {
+      throw Error(data.message);
+    }
+
+    return data.data;
+  },
+  (err) => {
+    const { status } = err.response;
+
+    // 未授权
+    if (status === 401) {
+      const { fullPath } = router.currentRoute.value;
+      router.push({
+        path: "/user/login",
+        query: { from: decodeURI(fullPath) },
+      });
+    }
+  }
+);
+
+const request = <T = any, R = T, D = any>(config: AxiosRequestConfig<D>) => {
+  return instance.request<T, R, D>(config);
 };
 
 export default request;

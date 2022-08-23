@@ -102,21 +102,24 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import {
   UserOutlined,
   LockOutlined,
   MobileOutlined,
 } from "@ant-design/icons-vue";
-import { useRequest } from "usevhooks";
 
 import CountdownButton from "@/components/CountdownButton.vue";
-import { login } from "@/api/user";
+import { LoginDto } from "@/api/user";
+import { useUserStore } from "@/stores/user";
+import router from "@/router";
+
+const userStore = useUserStore();
 
 const formRef = reactive({
   type: "account",
-  username: "",
-  password: "",
+  username: "xixi",
+  password: "xixi",
   mobile: "",
   captcha: "",
 });
@@ -128,23 +131,35 @@ const rules = reactive({
 
 const { validate, validateInfos } = useForm(formRef, rules);
 
-const { run, loading } = useRequest(login, {
-  manual: true,
-});
+const loading = ref<boolean>(false);
 
 const onLogin = async () => {
-  await validate();
-  const { type, username, password, captcha, mobile } = formRef;
+  try {
+    loading.value = true;
+    await validate();
 
-  const submitData = { type };
+    const { type, username, password, captcha, mobile } = formRef;
 
-  if (type === "account") {
-    Object.assign(submitData, { username, password });
+    const submitData = { type };
+
+    if (type === "account") {
+      Object.assign(submitData, { username, password });
+    }
+
+    if (type === "mobile") {
+      Object.assign(submitData, { mobile, captcha });
+    }
+
+    await userStore.login(submitData as LoginDto);
+
+    // todo
+    router.push({
+      path: "/system/menu",
+    });
+  } catch (error) {
+    console.log("error: ", error);
+  } finally {
+    loading.value = false;
   }
-
-  if (type === "mobile") {
-    Object.assign(submitData, { mobile, captcha });
-  }
-  await run(submitData);
 };
 </script>
