@@ -8,19 +8,29 @@ export const columns: TableColumnType<Job>[] = [
     key: "id",
   },
   {
-    title: "岗位编码",
-    dataIndex: "code",
-    key: "code",
-  },
-  {
-    title: "岗位名称",
+    title: "菜单名称",
     dataIndex: "name",
     key: "name",
   },
   {
-    title: "岗位排序",
+    title: "图标",
+    dataIndex: "icon",
+    key: "icon",
+  },
+  {
+    title: "排序",
     dataIndex: "order",
     key: "order",
+  },
+  {
+    title: "权限标识",
+    dataIndex: "permission",
+    key: "permission",
+  },
+  {
+    title: "组件路径",
+    dataIndex: "path",
+    key: "path",
   },
   {
     title: "状态",

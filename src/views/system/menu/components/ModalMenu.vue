@@ -14,7 +14,7 @@
       <a-row>
         <a-col :span="24">
           <a-form-item label="上级菜单" v-bind="validateInfos.parentId">
-            <a-input v-model:value="formRef.parentId" />
+            <MenuTreeSelect v-model:value="formRef.parentId" />
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -49,7 +49,7 @@
           </a-form-item>
         </a-col>
 
-        <a-col :span="24">
+        <a-col :span="24" v-if="formRef.type === MenuType.Menu">
           <a-form-item v-bind="validateInfos.permissions">
             <template #label>
               <form-label
@@ -61,7 +61,7 @@
             <a-input v-model:value="formRef.permissions" />
           </a-form-item>
         </a-col>
-        <a-col :span="24">
+        <a-col :span="24" v-if="formRef.type === MenuType.Menu">
           <a-form-item v-bind="validateInfos.query">
             <template #label>
               <form-label>
@@ -107,8 +107,8 @@
               </form-label>
             </template>
             <a-radio-group v-model:value="formRef.visible">
-              <a-radio :value="0">显示</a-radio>
-              <a-radio :value="1">隐藏</a-radio>
+              <a-radio :value="1">显示</a-radio>
+              <a-radio :value="0">隐藏</a-radio>
             </a-radio-group>
           </a-form-item>
         </a-col>
@@ -126,12 +126,12 @@
               </form-label>
             </template>
             <a-radio-group v-model:value="formRef.status">
-              <a-radio :value="0">停用</a-radio>
               <a-radio :value="1">正常</a-radio>
+              <a-radio :value="0">停用</a-radio>
             </a-radio-group>
           </a-form-item>
         </a-col>
-        <a-col :span="12">
+        <a-col :span="12" v-if="formRef.type === MenuType.Menu">
           <a-form-item
             :labelCol="{ span: 8 }"
             :wrapperCol="{ span: 16 }"
@@ -145,8 +145,8 @@
               </form-label>
             </template>
             <a-radio-group v-model:value="formRef.isCache">
-              <a-radio :value="0">不缓存</a-radio>
               <a-radio :value="1">缓存</a-radio>
+              <a-radio :value="0">不缓存</a-radio>
             </a-radio-group>
           </a-form-item>
         </a-col>
@@ -156,8 +156,10 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, watch } from "vue";
-import { Form } from "ant-design-vue";
+import { useRequest } from "usevhooks";
+import { MenuType } from "./ModalMenu";
+import { saveMenu } from "@/api/system";
+import MenuTreeSelect from "./MenuTreeSelect.vue";
 
 export type ModalMenuProps = {
   visible: boolean;
@@ -165,8 +167,6 @@ export type ModalMenuProps = {
   title?: string;
   width?: number;
 };
-
-const useForm = Form.useForm;
 
 const props = withDefaults(defineProps<ModalMenuProps>(), {
   visible: false,
@@ -177,16 +177,15 @@ const props = withDefaults(defineProps<ModalMenuProps>(), {
 const emit = defineEmits(["confirm", "update:visible"]);
 
 const formRef = reactive({
+  parentId: 1,
+  name: "用户管理",
+  path: "user",
   type: 0,
   icon: "",
-  name: "",
   order: 1,
-  path: "",
-  parentId: 1,
-  isLink: 1,
+  isLink: 0,
   visible: 1,
   status: 1,
-
   query: "",
   permissions: "",
   isCache: 1,
@@ -200,21 +199,26 @@ const rules = reactive({
 
 const { validate, validateInfos, resetFields } = useForm(formRef, rules);
 
-// watch(
-//   () => props.visible,
-//   (visible, prevVisible) => {
-//     if (visible && !prevVisible) {
-//       Object.assign(formRef, props.data);
-//     }
+watch(
+  () => props.visible,
+  (visible, prevVisible) => {
+    if (visible && !prevVisible) {
+      Object.assign(formRef, props.data);
+    }
 
-//     if (!visible && prevVisible) {
-//       resetFields();
-//     }
-//   }
-// );
+    if (!visible && prevVisible) {
+      resetFields();
+    }
+  }
+);
+
+const { run } = useRequest(saveMenu, {
+  manual: true,
+});
 
 const onOk = async () => {
   await validate();
+  await run(formRef);
   emit("confirm", { ...formRef });
 };
 

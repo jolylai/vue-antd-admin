@@ -20,6 +20,7 @@ export const queryJobList = (params: any) => {
 };
 
 export type Menu = {
+  id: number;
   type: string;
   icon: string;
   name: string;
@@ -33,8 +34,14 @@ export type Menu = {
   updatedAt: Date;
 };
 
-export const queryMenuList = (params: any) => {
-  return request<{ list: Menu[]; total: number }>({
+export type MenuQueryParams = {
+  name?: string;
+  status?: number;
+  parentId?: number;
+};
+
+export const queryMenu = (params?: MenuQueryParams) => {
+  return request<MenuQueryParams, Menu[]>({
     url: "/api/menu",
     method: "get",
     params,

@@ -34,6 +34,7 @@ declare module '@vue/runtime-core' {
     ATabs: typeof import('ant-design-vue/es')['Tabs']
     ATextarea: typeof import("ant-design-vue/es")["Textarea"]
     ATooltip: typeof import('ant-design-vue/es')['Tooltip']
+    ATreeSelect: typeof import('ant-design-vue/es')['TreeSelect']
     countdownButton: typeof import('./src/components/ countdown-button.vue')['default']
     CountdownButton: typeof import('./src/components/CountdownButton.vue')['default']
     FormLabel: typeof import('./src/components/FormLabel.vue')['default']

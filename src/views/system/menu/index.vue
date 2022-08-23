@@ -1,5 +1,5 @@
 <template>
-  <modal-menu :visible="true" />
+  <modal-menu v-model:visible="menuModalState.visible" />
 
   <div>
     <a-button type="primary">新增</a-button>
@@ -13,11 +13,11 @@
       </template>
 
       <template v-else-if="column.key === 'action'">
-        <span>
+        <a-space>
+          <a @click="onAdd(record)">新增</a>
           <a>修改</a>
-          <a-divider type="vertical" />
           <a>删除</a>
-        </span>
+        </a-space>
       </template>
     </template>
   </a-table>
@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from "vue";
-import { queryMenuList } from "@/api/system";
+import { Menu, queryMenu } from "@/api/system";
 import { columns } from "./index";
 
 import ModalMenu from "./components/ModalMenu.vue";
@@ -33,12 +33,16 @@ import ModalMenu from "./components/ModalMenu.vue";
 const dataSource = ref();
 
 onMounted(async () => {
-  const { list } = await queryMenuList({ current: 1, pageSize: 10 });
-  dataSource.value = list;
+  dataSource.value = await queryMenu();
 });
 
 const menuModalState = reactive({
-  visible: true,
+  visible: false,
   data: {},
 });
+
+const onAdd = ({ parentId }: Menu) => {
+  menuModalState.data = { parentId };
+  menuModalState.visible = true;
+};
 </script>

@@ -25,8 +25,7 @@ export default defineConfig({
       resolvers: [AntDesignVueResolver()],
     }),
     AutoImport({
-      // imports: ["vue", "vue-router"],
-      imports: [{ "ant-design-vue/es/form": ["useForm"] }],
+      imports: ["vue", "vue-router", { "ant-design-vue/es/form": ["useForm"] }],
     }),
     Unocss({
       presets: [presetWind()],
