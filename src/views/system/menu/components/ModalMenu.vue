@@ -3,6 +3,7 @@
     :title="title"
     :visible="visible"
     :width="width"
+    :confirmLoading="loading"
     @ok="onOk"
     @cancel="onCancel"
   >
@@ -212,7 +213,7 @@ watch(
   }
 );
 
-const { run } = useRequest(saveMenu, {
+const { run, loading } = useRequest(saveMenu, {
   manual: true,
 });
 

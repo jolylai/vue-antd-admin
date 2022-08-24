@@ -1,5 +1,8 @@
 <template>
-  <modal-menu v-model:visible="menuModalState.visible" />
+  <modal-menu
+    v-model:visible="menuModalState.visible"
+    :data="menuModalState.data"
+  />
 
   <div>
     <a-button type="primary">新增</a-button>
@@ -15,8 +18,8 @@
       <template v-else-if="column.key === 'action'">
         <a-space>
           <a @click="onAdd(record)">新增</a>
-          <a>修改</a>
-          <a>删除</a>
+          <a @click="onEdit(record)">修改</a>
+          <a @click="onDelete(record)">删除</a>
         </a-space>
       </template>
     </template>
@@ -42,6 +45,16 @@ const menuModalState = reactive({
 });
 
 const onAdd = ({ parentId }: Menu) => {
+  menuModalState.data = { parentId };
+  menuModalState.visible = true;
+};
+
+const onEdit = (record: Menu) => {
+  menuModalState.data = record;
+  menuModalState.visible = true;
+};
+
+const onDelete = ({ parentId }: Menu) => {
   menuModalState.data = { parentId };
   menuModalState.visible = true;
 };

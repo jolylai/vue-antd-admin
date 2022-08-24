@@ -21,7 +21,7 @@ instance.interceptors.request.use((config) => {
 
   if (token) {
     config.headers = Object.assign({}, config.headers, {
-      Authorization: token,
+      Authorization: `Bearer ${token}`,
     });
   }
 

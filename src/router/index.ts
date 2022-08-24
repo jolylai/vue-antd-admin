@@ -4,6 +4,10 @@ const BasicLayout = () => import("@/layout/index.vue");
 
 export const constantRoutes: RouteRecordRaw[] = [
   {
+    path: "/",
+    redirect: "/system/menu",
+  },
+  {
     path: "/user",
     component: EmptyLayout,
     children: [

@@ -1,10 +1,12 @@
 <template>
   <a-tree-select
+    :value="value"
+    @update:value="onUpdateValue"
     tree-data-simple-mode
     style="width: 100%"
     :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
     :tree-data="treeData"
-    placeholder="Please select"
+    placeholder="请选择"
     :load-data="onLoadData"
   />
 </template>
@@ -12,17 +14,21 @@
 import { MenuQueryParams, queryMenu } from "@/api/system";
 import type { TreeSelectProps } from "ant-design-vue";
 
-const value = ref<string>();
+export type ValueType = string | string[] | number | number[];
+
+export type MenuTreeSelectProps = {
+  value: ValueType;
+};
+
+defineProps<MenuTreeSelectProps>();
+
+const emit = defineEmits(["update:value"]);
 
 const treeData = ref<TreeSelectProps["treeData"]>([
-  // { id: 1, pId: 0, value: "1", title: "Expand to load" },
+  { id: 0, pId: null, value: 0, title: "主类目" },
   // { id: 2, pId: 0, value: "2", title: "Expand to load" },
   // { id: 3, pId: 0, value: "3", title: "Tree Node", isLeaf: true },
 ]);
-
-watch(value, () => {
-  console.log(value.value);
-});
 
 const queryMenuData = async (params?: MenuQueryParams) => {
   const data = await queryMenu(params);
@@ -52,5 +58,10 @@ const onLoadData = async (treeNode: TreeSelectProps["treeData"][number]) => {
 
   treeData.value = treeData.value?.concat(data);
   console.log("treeData.value: ", treeData.value);
+};
+
+const onUpdateValue = (value: ValueType) => {
+  console.log("value: ", value);
+  emit("update:value", value);
 };
 </script>

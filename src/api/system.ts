@@ -48,10 +48,24 @@ export const queryMenu = (params?: MenuQueryParams) => {
   });
 };
 
+export const viewMenu = (menuId: number) => {
+  return request<number, Menu>({
+    url: `/api/menu/${menuId}`,
+    method: "get",
+  });
+};
+
 export const saveMenu = (data: Menu) => {
   return request<Menu>({
     url: "/api/menu",
     method: "post",
     data,
+  });
+};
+
+export const deleteMenu = (menuId: number) => {
+  return request({
+    url: `/api/menu/${menuId}`,
+    method: "delete",
   });
 };
