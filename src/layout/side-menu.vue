@@ -12,10 +12,12 @@
             <MailOutlined />
           </template>
           <template #title>系统管理</template>
-          <a-menu-item key="5">Option 5</a-menu-item>
-          <a-menu-item key="6">Option 6</a-menu-item>
-          <a-menu-item key="7">Option 7</a-menu-item>
-          <a-menu-item key="8">Option 8</a-menu-item>
+          <router-link to="/system/job">
+            <a-menu-item key="5">岗位管理</a-menu-item>
+          </router-link>
+          <router-link to="/system/menu">
+            <a-menu-item key="6">菜单管理</a-menu-item>
+          </router-link>
         </a-sub-menu>
       </a-menu>
     </div>

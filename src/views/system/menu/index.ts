@@ -1,7 +1,22 @@
-import { Job } from "@/api/system";
 import { TableColumnType } from "ant-design-vue";
 
-export const columns: TableColumnType<Job>[] = [
+export type Menu = {
+  id: number;
+  type: string;
+  icon: string;
+  name: string;
+  order: number;
+  path: string;
+  parentId: number;
+  isLink: number;
+  visible: number;
+  status: number;
+  createdAt: Date;
+  updatedAt: Date;
+  children?: Menu[];
+};
+
+export const columns: TableColumnType<Menu>[] = [
   {
     title: "ID",
     dataIndex: "id",

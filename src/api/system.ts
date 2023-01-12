@@ -34,6 +34,8 @@ export type Menu = {
   updatedAt: Date;
 };
 
+
+
 export type MenuQueryParams = {
   name?: string;
   status?: number;

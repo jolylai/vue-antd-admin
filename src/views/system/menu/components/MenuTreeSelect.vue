@@ -4,6 +4,7 @@
     @update:value="onUpdateValue"
     tree-data-simple-mode
     style="width: 100%"
+    :treeDefaultExpandedKeys="[0]"
     :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
     :tree-data="treeData"
     placeholder="请选择"
@@ -32,7 +33,6 @@ const treeData = ref<TreeSelectProps["treeData"]>([
 
 const queryMenuData = async (params?: MenuQueryParams) => {
   const data = await queryMenu(params);
-  console.log("data: ", data);
 
   return data.map((item) =>
     Object.assign(item, {
@@ -45,23 +45,17 @@ const queryMenuData = async (params?: MenuQueryParams) => {
 };
 
 onMounted(async () => {
-  const menuData = await queryMenuData();
-
+  const menuData = await queryMenuData({ parentId: 0 });
   treeData.value = treeData.value?.concat(menuData);
-  // console.log("treeData.value: ", treeData.value);
 });
 
-const onLoadData = async (treeNode: TreeSelectProps["treeData"][number]) => {
+const onLoadData = async (treeNode: any) => {
   const { id } = treeNode.dataRef;
-
   const data = await queryMenuData({ parentId: id });
-
   treeData.value = treeData.value?.concat(data);
-  console.log("treeData.value: ", treeData.value);
 };
 
 const onUpdateValue = (value: ValueType) => {
-  console.log("value: ", value);
   emit("update:value", value);
 };
 </script>
