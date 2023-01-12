@@ -22,9 +22,11 @@ export default defineConfig({
   plugins: [
     vue(),
     Components({
+      dts: "./types/ant-design-vue.d.ts",
       resolvers: [AntDesignVueResolver()],
     }),
     AutoImport({
+      dts: "./types/auto-import.d.ts",
       imports: ["vue", "vue-router", { "ant-design-vue/es/form": ["useForm"] }],
     }),
     Unocss({

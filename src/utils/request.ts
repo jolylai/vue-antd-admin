@@ -1,13 +1,8 @@
-import Axios from "axios";
+import Axios, { AxiosResponse } from "axios";
 import type { AxiosRequestConfig } from "axios";
+import type { AxiosResponseData } from "../../types/axios.d";
 import router from "@/router";
 import { useUserStore } from "@/stores/user";
-
-export type RequestResponse<T = any> = {
-  code: number;
-  message: string;
-  data: T;
-};
 
 const instance = Axios.create({
   baseURL: "http://localhost:7070",
@@ -28,16 +23,16 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
-instance.interceptors.response.use(
+instance.interceptors.response.use<AxiosResponse<AxiosResponseData>>(
   (response) => {
     const { data } = response;
 
     // 业务错误
     if (data.code !== 0) {
-      throw Error(data.message);
+      return Promise.reject(data);
     }
 
-    return data.data;
+    return data;
   },
   (err) => {
     const { status } = err.response;
@@ -53,8 +48,9 @@ instance.interceptors.response.use(
   }
 );
 
-const request = <T = any, R = T, D = any>(config: AxiosRequestConfig<D>) => {
-  return instance.request<T, R, D>(config);
+const request = async <T = any>(config: AxiosRequestConfig): Promise<T> => {
+  const data = await instance.request<T>(config);
+  return data.data;
 };
 
 export default request;

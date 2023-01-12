@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import EmptyLayout from "@/layout/empty.vue";
-const BasicLayout = () => import("@/layout/index.vue");
+
+const BasicLayout = () => import("@/layout/default/index.vue");
 
 export const constantRoutes: RouteRecordRaw[] = [
   {

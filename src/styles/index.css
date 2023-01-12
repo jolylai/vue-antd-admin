@@ -2,6 +2,11 @@ body {
   margin: 0;
 }
 
+#app {
+  width: 100%;
+  height: 100%;
+}
+
 .ant-form .ant-input-number {
   width: 100%;
 }
