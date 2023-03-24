@@ -23,7 +23,7 @@ export default defineConfig({
     vue(),
     Components({
       dts: "./types/ant-design-vue.d.ts",
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [AntDesignVueResolver({ importStyle: false })],
     }),
     AutoImport({
       dts: "./types/auto-import.d.ts",

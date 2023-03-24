@@ -111,8 +111,8 @@ import {
 
 import CountdownButton from "@/components/CountdownButton.vue";
 import { LoginDto } from "@/api/user";
-import { useUserStore } from "@/stores/user";
-import router from "@/router";
+import { useUserStore } from "@/stores/modules/user";
+import { router } from "@/router";
 
 const userStore = useUserStore();
 
