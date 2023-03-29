@@ -1,48 +1,38 @@
 <template>
+  <div style="width: 208px; flex: 0 0 208px"></div>
   <a-layout-sider
-    class="layout-sider"
+    class="sider"
     collapsible
+    :width="208"
     :collapsed="getCollapsed"
     :collapsedWidth="48"
   >
+    <Logo />
+    <Menu />
     <template #trigger>
       <div class="layout-trigger">
         <LayoutTrigger></LayoutTrigger>
       </div>
     </template>
-    <a-menu theme="light" mode="inline">
-      <a-menu-item key="1">
-        <user-outlined />
-        <span>nav 1</span>
-      </a-menu-item>
-      <a-menu-item key="2">
-        <video-camera-outlined />
-        <span>nav 2</span>
-      </a-menu-item>
-      <a-menu-item key="3">
-        <upload-outlined />
-        <span>nav 3</span>
-      </a-menu-item>
-    </a-menu>
   </a-layout-sider>
 </template>
 
 <script lang="ts" setup>
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from "@ant-design/icons-vue";
 import { useMenuSetting } from "@/hooks/useMenuSetting";
 
 import LayoutTrigger from "../trigger/index.vue";
+import Menu from "../menu/index.vue";
+import Logo from "../logo/index.vue";
 
 const { getCollapsed } = useMenuSetting();
 </script>
 
 <style scoped>
-.layout-sider {
-  background-color: #fff;
+.sider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
 }
 
 .layout-trigger {

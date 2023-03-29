@@ -172,10 +172,10 @@ export function forEachTree<T = any>(
 /**
  * @description: Extract tree specified structure
  */
-export function mapTree<T = any>(
+export function mapTree<T = any, U = any>(
   treeData: T[],
-  opt: { children?: string; conversion: AnyFunction<any> }
-): T[] {
+  opt: { children?: string; conversion: (data: T) => U }
+): U[] {
   return treeData.map((item) => doMapTree(item, opt));
 }
 

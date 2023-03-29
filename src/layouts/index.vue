@@ -1,24 +1,24 @@
 <template>
-  <a-layout class="default-layout">
-    <LayoutHeader></LayoutHeader>
+  <a-layout>
+    <Sider></Sider>
     <a-layout>
-      <LayoutSider></LayoutSider>
-      <LayoutContent></LayoutContent>
+      <Header />
+      <a-layout-content> Content </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 
 <script lang="ts" setup>
-import LayoutHeader from "./default/header/index.vue";
-import LayoutSider from "./default/sider/index.vue";
-import LayoutContent from "./default/content/index.vue";
+import Header from "./components/header/index.vue";
+import Sider from "./components/sider/index.vue";
+import Trigger from "./components/trigger/index.vue";
+// import LayoutContent from "./default/content/index.vue";
+
+type LayoutProps = {
+  fixSiderbar: boolean;
+};
+
+defineProps<LayoutProps>();
 </script>
 
-<style scoped>
-.default-layout {
-  min-height: 100%;
-  /* display: flex;
-  width: 100%;
-  flex-direction: column; */
-}
-</style>
+<style scoped></style>
