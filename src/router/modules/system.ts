@@ -1,25 +1,11 @@
-import { LAYOUT } from "@/router/constant";
 import { RouteRecordRaw } from "vue-router";
+import { Layout } from "@/router/constant";
 
 const system: RouteRecordRaw[] = [
   {
-    path: "/",
-    redirect: "/system/menu",
-  },
-  {
-    path: "/user",
-    component: LAYOUT,
-    children: [
-      {
-        path: "/user/login",
-        component: () => import("@/views/user/login/index.vue"),
-      },
-    ],
-  },
-  {
     path: "/system",
     name: "system",
-    component: LAYOUT,
+    component: Layout,
     meta: { title: "标题" },
     children: [
       {

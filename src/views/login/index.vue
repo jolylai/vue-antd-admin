@@ -108,12 +108,13 @@ import {
   LockOutlined,
   MobileOutlined,
 } from "@ant-design/icons-vue";
+import { useRouter } from "vue-router";
 
 import CountdownButton from "@/components/CountdownButton.vue";
 import { LoginDto } from "@/api/user";
 import { useUserStore } from "@/stores/modules/user";
-import { router } from "@/router";
 
+const router = useRouter();
 const userStore = useUserStore();
 
 const formRef = reactive({
@@ -149,13 +150,6 @@ const onLogin = async () => {
     if (type === "mobile") {
       Object.assign(submitData, { mobile, captcha });
     }
-
-    await userStore.login(submitData as LoginDto);
-
-    // todo
-    router.push({
-      path: "/system/menu",
-    });
   } catch (error) {
     console.log("error: ", error);
   } finally {

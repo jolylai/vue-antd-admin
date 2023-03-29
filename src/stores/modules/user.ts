@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { store } from "@/stores";
+
 import { getUser, login, LoginDto } from "@/api/user";
 import { getToken, setToken } from "@/utils/auth";
 
@@ -32,3 +34,8 @@ export const useUserStore = defineStore("user", {
     async getUserInfoAction() {},
   },
 });
+
+// Need to be used outside the setup
+export function useUserStoreWidthOut() {
+  return useUserStore(store);
+}

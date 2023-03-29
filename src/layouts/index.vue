@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts" setup>
-import LayoutHeader from "./header/index.vue";
-import LayoutSider from "./sider/index.vue";
-import LayoutContent from "./content/index.vue";
+import LayoutHeader from "./default/header/index.vue";
+import LayoutSider from "./default/sider/index.vue";
+import LayoutContent from "./default/content/index.vue";
 </script>
 
 <style scoped>

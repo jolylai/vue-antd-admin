@@ -56,3 +56,7 @@ export interface MenuModule {
 
 // export type AppRouteModule = RouteModule | AppRouteRecordRaw;
 export type AppRouteModule = AppRouteRecordRaw;
+
+export interface IModuleType {
+  default: Array<RouteRecordRaw> | RouteRecordRaw;
+}

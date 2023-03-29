@@ -1,15 +1,15 @@
 import Axios, { AxiosResponse } from "axios";
 import type { AxiosRequestConfig } from "axios";
 import type { AxiosResponseData } from "../../types/axios.d";
-import { router } from "@/router";
-import { useUserStore } from "@/stores/modules/user";
+import router from "@/router";
+import { useUserStoreWidthOut } from "@/stores/modules/user";
 
 const instance = Axios.create({
   baseURL: "http://localhost:7070",
 });
 
 instance.interceptors.request.use((config) => {
-  const userStore = useUserStore();
+  const userStore = useUserStoreWidthOut();
 
   // if(config.headers.Authorization)
   const token = userStore.token;

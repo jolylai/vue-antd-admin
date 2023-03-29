@@ -4,12 +4,12 @@ import "uno.css";
 import "./styles/index.css";
 import App from "./App.vue";
 
-import { router, setupRouter } from "./router";
-import { setupGuard } from "./router/guard";
+import { setupRouter } from "./router";
+import { setupStore } from "./stores";
 
 const app = createApp(App);
 
 setupRouter(app);
-setupGuard(router);
+setupStore(app);
 
 app.mount("#app");
