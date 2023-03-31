@@ -40,7 +40,11 @@ declare module '@vue/runtime-core' {
     ATreeSelect: typeof import('ant-design-vue/es')['TreeSelect']
     CountdownButton: typeof import('./../src/components/CountdownButton.vue')['default']
     FormLabel: typeof import('./../src/components/FormLabel.vue')['default']
+    IAntDesignSettingFilled: typeof import('~icons/ant-design/setting-filled')['default']
+    ICarbonAccessibility: typeof import('~icons/carbon/accessibility')['default']
+    IMdiUsbFlashDrive: typeof import('~icons/mdi/usb-flash-drive')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    XTable: typeof import('./../src/components/x-table/index.vue')['default']
   }
 }

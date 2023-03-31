@@ -1,7 +1,7 @@
 <template>
   <a-modal
     :title="title"
-    :visible="visible"
+    :open="visible"
     :width="width"
     :confirmLoading="loading"
     @ok="onOk"

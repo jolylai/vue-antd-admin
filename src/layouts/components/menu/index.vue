@@ -9,7 +9,7 @@
       <template v-if="!item.children">
         <a-menu-item :key="item.key">
           <template #icon>
-            <PieChartOutlined />
+            <component :is="`i-ant-design-${item.icon}`" />
           </template>
           {{ item.title }}
         </a-menu-item>
@@ -23,7 +23,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { RouteRecordRaw, useRouter } from "vue-router";
-import { PieChartOutlined } from "@ant-design/icons-vue";
 
 import SubMenu from "./sub-menu.vue";
 import { asyncRoutes } from "@/router";

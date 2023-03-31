@@ -1,13 +1,12 @@
 <template>
   <a-sub-menu :key="option.key">
-    <template #icon><MailOutlined /></template>
+    <template #icon>
+      <component :is="option.icon" />
+    </template>
     <template #title>{{ option.title }}</template>
     <template v-for="item in option.children" :key="item.key">
       <template v-if="!item.children">
         <a-menu-item :key="item.key">
-          <template #icon>
-            <PieChartOutlined />
-          </template>
           {{ item.title }}
         </a-menu-item>
       </template>
@@ -19,7 +18,6 @@
 </template>
 
 <script lang="ts" setup>
-import { PieChartOutlined, MailOutlined } from "@ant-design/icons-vue";
 import { MenuOption } from "./index.vue";
 
 type SubMenuProps = {
