@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center bg-white h-12 px-4">
+  <div class="flex items-center bg-white h-12 px-4 shadow">
     <div class="flex-1"></div>
     <a-dropdown>
       <div class="h-12 flex items-center space-x-2" @click.prevent>

@@ -30,7 +30,6 @@ watch(counter, (counter) => {
 
 const onClick = () => {
   counter.value = props.seconds;
-
   counterId.value = setInterval(() => {
     counter.value -= 1;
   }, 1000);
